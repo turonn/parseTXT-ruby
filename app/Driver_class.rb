@@ -30,26 +30,26 @@ class Driver
 
   def add_time(time)
     arr = @total_time.split(':')
-    totalHours = arr[0].to_i
-    totalMinutes = arr[1].to_i
+    total_hours = arr[0].to_i
+    total_minutes = arr[1].to_i
 
     arr2 = time.split(':')
-    newHours = arr2[0].to_i
-    newMinutes = arr2[1].to_i
+    new_hours = arr2[0].to_i
+    new_minutes = arr2[1].to_i
 
-    totalHours += newHours
-    totalMinutes += newMinutes
+    total_hours += new_hours
+    total_minutes += new_minutes
 
-    @total_time = "#{totalHours}:#{totalMinutes}"
+    @total_time = "#{total_hours}:#{total_minutes}"
   end
 
   def calculate_avg_speed
     unless @total_miles == 0 || @total_time.count('1-9') == 0
-      timeArray = @total_time.split(':')
-      timeArray[1] = timeArray[1].to_f / 60.0
-      timeNum = timeArray[0].to_i + timeArray[1]
+      time_array = @total_time.split(':')
+      time_array[1] = time_array[1].to_f / 60.0
+      time_num = time_array[0].to_i + time_array[1]
 
-      @avg_speed = (@total_miles / timeNum).round()
+      @avg_speed = (@total_miles / time_num).round()
     end
   end
 

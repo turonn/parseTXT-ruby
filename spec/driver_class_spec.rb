@@ -1,9 +1,9 @@
-require '../app/Driver_class.rb'
+require '../app/driver_class.rb'
 
 RSpec.describe "Driver" do 
   subject { Driver.new("testName") }
 
-  describe 'initialize' do
+  describe '#initialize' do
     it "initializes instance variables" do
       expect(subject.total_time).to eq('0:0')
       expect(subject.total_miles).to eq(0)
@@ -16,7 +16,7 @@ RSpec.describe "Driver" do
     end
   end
 
-  describe "add_time" do
+  describe "#add_time" do
     it "adds the correct time to existing time" do
       subject.total_time = '1:15'
       subject.add_time('1:01')
@@ -33,7 +33,7 @@ RSpec.describe "Driver" do
     end
   end
 
-  describe 'add_miles' do
+  describe '#add_miles' do
     it "adds correct miles to existing miles" do
       subject.total_miles = 13
       subject.add_miles(12)
@@ -46,7 +46,7 @@ RSpec.describe "Driver" do
     end
   end
 
-  describe 'calculate_avg_speed' do
+  describe '#calculate_avg_speed' do
     it 'calculates the speed of non-zero numbers' do
       subject.total_miles = 45
       subject.total_time = '1:0'
@@ -73,33 +73,38 @@ RSpec.describe "Driver" do
     end
   end
 
-  describe "self.lookup" do
+  describe ".lookup" do
     it 'returns the record when given the driver name' do
-      Jill = Driver.new("Jill")
-      Jill.total_miles = 10
-      Snyder = Driver.new("Snyder")
-      Snyder.total_miles = 23
-      Rambo = Driver.new("Rambo")
-      Rambo.total_miles = 14
+      jill = Driver.new("Jill")
+      jill.total_miles = 10
+      snyder = Driver.new("Snyder")
+      snyder.total_miles = 23
+      rambo = Driver.new("Rambo")
+      rambo.total_miles = 14
 
-      expect(Driver.lookup("Snyder")).to eq(Snyder)
+      expect(Driver.lookup("Snyder")).to eq(snyder)
     end
   end
 
-  # describe 'self.sort' do
-  #   it 'sorts records in decending order by total_miles' do
-  #     Jill = Driver.new("Jill")
-  #     Jill.total_miles = 10
-  #     Snyder = Driver.new("Snyder")
-  #     Snyder.total_miles = 23
-  #     Rambo = Driver.new("Rambo")
-  #     Rambo.total_miles = 14
+  describe '.sort' do
+    it 'sorts records in decending order by total_miles' do
+      jessica = Driver.new("Jessica")
+      jessica.total_miles = 100
+      omar = Driver.new("Omar")
+      omar.total_miles = 230
+      achmed = Driver.new("Achmed")
+      achmed.total_miles = 140
 
-  #     expect(Driver.sort).to match_array([
-  #       Snyder,
-  #       Rambo,
-  #       Jill      
-  #     ])
-  #   end
-  # end
+      expect(Driver.sort).to start_with(
+        omar,
+        achmed,
+        jessica
+      )
+      expect(Driver.sort).to_not start_with(
+        jessica,
+        omar,
+        achmed
+      )
+    end
+  end
 end

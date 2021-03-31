@@ -1,5 +1,5 @@
-require_relative 'Driver_class'
-require_relative 'Trip_class'
+require_relative 'driver_class'
+require_relative 'trip_class'
 
 #ARGF takes all ARGV elements as filenames
 #iterate through each line of the txt file and log Drivers & Trips

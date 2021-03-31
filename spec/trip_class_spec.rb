@@ -1,4 +1,4 @@
-require '../app/Trip_class.rb'
+require '../app/trip_class.rb'
 
 RSpec.describe "Trip" do
   subject { Trip.new('testDan', '1:15', '2:15', 45) }
