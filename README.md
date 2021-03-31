@@ -4,7 +4,7 @@
     To run this program will require ruby 2.7 and RSpec 3.10
   </p>
   <p>
-    After unpacking the program, navigate into the parseTXT-ruby directory and run the comand
+    After unpacking the program, navigate into the parseTXT-ruby directory and run the comand:
   </p>
   <p>
     <code>$ ruby ./app/parse.rb &lt; TXT FILE PATH &gt;</code>
@@ -28,7 +28,7 @@
 </section>
 
 <section>
-  <h3>1. What is the problem really asking? (break it down)</h3>
+  <h2>1. What is the problem really asking? (break it down)</h2>
   <p>
     Take an input file, do some stuff with the data, spit back out intellegent analysis in a specified order. So there are 3/4 parts of this problem:
     <ol>
@@ -76,7 +76,8 @@
         </ul>
       </li>
     </ul>
-    
+  </p>
+  <p>
     On the Trip side of things, I'll need:
     <ul>
       <li>
