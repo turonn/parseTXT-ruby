@@ -12,6 +12,7 @@ class Driver
   end
 
   def self.sort
+    @all ||= []
     @all = @all.sort_by { |driver| -driver.total_miles }
   end
 

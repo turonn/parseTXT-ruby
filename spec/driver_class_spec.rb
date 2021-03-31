@@ -100,7 +100,7 @@ RSpec.describe "Driver" do
         achmed,
         jessica
       )
-      expect(Driver.sort).to_not start_with(
+      expect(Driver.sort).not_to start_with(
         jessica,
         omar,
         achmed
