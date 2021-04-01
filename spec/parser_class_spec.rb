@@ -75,10 +75,9 @@ RSpec.describe "Parser" do
         end
         file = File.open('testfile', 'r+')
       end
-      it "ignores trips that are over 100mph and under 5mph (invalid)" do
+      it "sorts valid drivers and ignores trips that are over 100mph and under 5mph (invalid)" do
         expect{ Parser.parse(file) }.to output("Lauren: 42 miles @ 34 mph\nDan: 39 miles @ 47 mph\nKumi: 0 miles\n").to_stdout
       end
     end
-
   end
 end

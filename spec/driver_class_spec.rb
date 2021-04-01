@@ -53,36 +53,44 @@ RSpec.describe "Driver" do
       subject.calculate_avg_speed
       expect(subject.avg_speed).to eq(45)
     end
-    it 'rounds the calculated speed of non-zero numbers to the nearest intiger' do
-      subject.total_miles = 42
-      subject.total_time = '1:15'
-      subject.calculate_avg_speed
-      expect(subject.avg_speed).to eq(34)
+    context "when given non-round non-zero numbers" do
+      it 'rounds the calculated speed to the nearest intiger' do
+        subject.total_miles = 42
+        subject.total_time = '1:15'
+        subject.calculate_avg_speed
+        expect(subject.avg_speed).to eq(34)
+      end
     end
-    it 'ignores cases where total_miles' do
-      subject.total_miles = 0
-      subject.total_time = '1:15'
-      subject.calculate_avg_speed
-      expect(subject.avg_speed).to be_zero
+    context "when total_miles = 0" do
+      it 'ignores the case and outputs zero' do
+        subject.total_miles = 0
+        subject.total_time = '1:15'
+        subject.calculate_avg_speed
+        expect(subject.avg_speed).to be_zero
+      end
     end
-    it 'ignores cases where total_time is zero' do
-      subject.total_miles = 45
-      subject.total_time = '0:0'
-      subject.calculate_avg_speed
-      expect(subject.avg_speed).to be_zero
+    context "when total_time = 0:0" do
+      it 'ignores the case and outputs zero' do
+        subject.total_miles = 45
+        subject.total_time = '0:0'
+        subject.calculate_avg_speed
+        expect(subject.avg_speed).to be_zero
+      end
     end
   end
 
   describe ".lookup" do
-    it 'returns the record when given the driver name' do
-      jill = Driver.new("Jill")
-      jill.total_miles = 10
-      snyder = Driver.new("Snyder")
-      snyder.total_miles = 23
-      rambo = Driver.new("Rambo")
-      rambo.total_miles = 14
-
-      expect(Driver.lookup("Snyder")).to eq(snyder)
+    context "when given the driver name" do
+      it 'returns the associated record' do
+        jill = Driver.new("Jill")
+        jill.total_miles = 10
+        snyder = Driver.new("Snyder")
+        snyder.total_miles = 23
+        rambo = Driver.new("Rambo")
+        rambo.total_miles = 14
+        
+        expect(Driver.lookup("Snyder")).to eq(snyder)
+      end
     end
   end
 

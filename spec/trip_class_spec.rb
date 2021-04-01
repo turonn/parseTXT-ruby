@@ -43,10 +43,12 @@ RSpec.describe "Trip" do
       subject.miles_driven = 45
       expect(subject.calculate_speed).to eq(45)
     end
-    it 'can handle rounding to the hundreths' do
-      subject.trip_time = "0:59"
-      subject.miles_driven = 45
-      expect(subject.calculate_speed).to eq(45.76)
+    context "when given a non-round number" do
+      it 'can handle rounding to the hundreths' do
+        subject.trip_time = "0:59"
+        subject.miles_driven = 45
+        expect(subject.calculate_speed).to eq(45.76)
+      end
     end
   end
 
