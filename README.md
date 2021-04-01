@@ -12,6 +12,9 @@
   <p>
     The solution should apear printed to the terminal.
   </p>
+  <p>
+    For your convience, I have included two basic test files at the root level of this program if you would like to use them to preview the program. <code>testing_basic.txt</code> and <code>testing_fastandslow.txt</code>
+  </p>
 </section>
 
 <section>
