@@ -3,14 +3,15 @@ require '../app/trip_class.rb'
 require '../app/driver_class.rb'
 # require 'tempfile'
 
-#my issue is persistant data between tests.
+# my issue is persistant data between tests.
 
 RSpec.describe "Parser" do 
   # let(:file) { Tempfile.new(['testfile', '.txt']) }
   file = nil
 
-  after(:all) do
-    file.delete
+  after(:each) do
+    file = File.open('testfile')
+    File.delete(file)
   end
 
   describe ".parse" do
@@ -28,7 +29,7 @@ RSpec.describe "Parser" do
         File.open('testfile', 'w+') do |f|
           f.write ("Driver Dan")
         end
-        file = File.open('testfile', 'r')
+        file = File.open('testfile')
       end
       it "outputs a single driver driving zero miles" do
         expect{ Parser.parse(file) }.to output("Dan: 0 miles\n").to_stdout
@@ -40,7 +41,7 @@ RSpec.describe "Parser" do
         File.open('testfile', 'w+') do |f|
           f.write("Driver Dan\nTrip Dan 7:15 8:15 105")
         end
-        file = File.open('testfile', 'r')
+        file = File.open('testfile')
       end
       it "outputs a single driver driving zero miles" do
         expect{ Parser.parse(file) }.to output("Dan: 0 miles\n").to_stdout
@@ -52,7 +53,7 @@ RSpec.describe "Parser" do
         File.open('testfile', 'w+') do |f|
           f.write("Driver Dan\nTrip Dan 07:15 07:45 17.3\nTrip Dan 06:12 06:32 21.8")
         end
-        file = File.open('testfile', 'r')
+        file = File.open('testfile')
       end
       it "outputs a driver with correct speed" do
         expect{ Parser.parse(file) }.to output("Dan: 39 miles @ 47 mph\n").to_stdout
@@ -64,7 +65,7 @@ RSpec.describe "Parser" do
         File.open('testfile', 'w+') do |f|
           f.write("Driver Dan\nTrip Dan 07:15 07:45 17.3\nTrip Dan 06:12 06:32 21.8\nDriver Lauren\nDriver Kumi\nTrip Lauren 12:01 13:16 42.0")
         end
-        file = File.open('testfile', 'r')
+        file = File.open('testfile')
       end
       it "sorts drivers by distance driven" do
         expect{ Parser.parse(file) }.to output("Lauren: 42 miles @ 34 mph\nDan: 39 miles @ 47 mph\nKumi: 0 miles\n").to_stdout
@@ -76,7 +77,7 @@ RSpec.describe "Parser" do
         File.open('testfile', 'w+') do |f|
           f.write("Driver Dan\nTrip Dan 07:15 07:45 17.3\nTrip Dan 06:12 06:32 21.8\nDriver Lauren\nDriver Kumi\nTrip Lauren 12:01 13:16 42.0\nTrip Kumi 15:16 16:16 4.0\nTrip Dan 21:00 22:00 150.0")
         end
-        file = File.open('testfile', 'r')
+        file = File.open('testfile', 'r+')
       end
       it "ignores trips that are over 100mph and under 5mph (invalid)" do
         expect{ Parser.parse(file) }.to output("Lauren: 42 miles @ 34 mph\nDan: 39 miles @ 47 mph\nKumi: 0 miles\n").to_stdout
