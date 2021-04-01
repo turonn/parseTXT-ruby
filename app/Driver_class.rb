@@ -5,6 +5,10 @@ class Driver
     @all ||= []
   end
 
+  def self.clear_data
+    @all = []
+  end
+
   def self.lookup(name)
     Driver.all.each do |driver|
       return driver if name == driver.name

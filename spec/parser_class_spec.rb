@@ -1,12 +1,8 @@
 require '../app/parser_class.rb'
 require '../app/trip_class.rb'
 require '../app/driver_class.rb'
-# require 'tempfile'
-
-# my issue is persistant data between tests.
 
 RSpec.describe "Parser" do 
-  # let(:file) { Tempfile.new(['testfile', '.txt']) }
   file = nil
 
   after(:each) do

@@ -1,5 +1,6 @@
 require_relative 'driver_class'
 require_relative 'trip_class'
+require 'byebug'
 
 class Parser
   def self.parse(arg)
@@ -42,5 +43,8 @@ class Parser
       end
     end
 
+    #clear data to stop RSpec from throwing a fit about persisting data
+    Driver.clear_data
+    Trip.clear_data
   end
 end

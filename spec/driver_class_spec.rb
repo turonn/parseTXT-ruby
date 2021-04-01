@@ -107,4 +107,12 @@ RSpec.describe "Driver" do
       )
     end
   end
+
+  describe '.clear_data' do
+    it 'empties the contents of the @all class variable' do
+      expect(Driver.all).not_to be_empty
+      Driver.clear_data
+      expect(Driver.all).to be_empty
+    end
+  end
 end

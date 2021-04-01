@@ -5,6 +5,10 @@ class Trip
     @all ||= []
   end
 
+  def self.clear_data
+    @all = []
+  end
+
   def initialize(name, start_time, end_time, miles_driven)
     @name = name
     @start_time = start_time

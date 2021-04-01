@@ -49,4 +49,12 @@ RSpec.describe "Trip" do
       expect(subject.calculate_speed).to eq(45.76)
     end
   end
+
+  describe '.clear_data' do
+    it 'empties the contents of the @all class variable' do
+      expect(Trip.all).not_to be_empty
+      Trip.clear_data
+      expect(Trip.all).to be_empty
+    end
+  end
 end
