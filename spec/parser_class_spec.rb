@@ -4,7 +4,7 @@ require '../app/driver_class.rb'
 require 'tempfile'
 
 RSpec.describe "Parser" do 
-  let(:file) { Tempfile.new('txt') }
+  let(:file) { Tempfile.new(['testfile', '.txt']) }
 
   after do
     file.unlink
@@ -16,7 +16,6 @@ RSpec.describe "Parser" do
     end
 
     it "outputs a single driver driving zero miles" do
-      file.flush
       file.write("Driver Dan")
       file.rewind
       expect{ Parser.parse(file) }.to output("Dan: 0 miles\n").to_stdout
@@ -30,19 +29,12 @@ RSpec.describe "Parser" do
     end
 
     it "sorts multiple drivers by distance driven" do
-      file.flush
-      file.write("Driver Dan")
-      file.write("Trip Dan 07:15 07:45 17.3\nTrip Dan 06:12 06:32 21.8")
-      file.write("Driver Lauren\nDriver Kumi\nTrip Lauren 12:01 13:16 42.0")
+      file.write("\nDriver Lauren\nDriver Kumi\nTrip Lauren 12:01 13:16 42.0")
       file.rewind
       expect{ Parser.parse(file) }.to output("Lauren: 42 miles @ 34 mph\nDan: 39 miles @ 47 mph\nKumi: 0 miles\n").to_stdout
     end
 
     it "ignores trips that are over 100mph" do
-      file.flush
-      file.write("Driver Dan")
-      file.write("Trip Dan 07:15 07:45 17.3\nTrip Dan 06:12 06:32 21.8")
-      file.write("Driver Lauren\nDriver Kumi\nTrip Lauren 12:01 13:16 42.0")
       file.write("Trip Kumi 15:16 16:16 105")
       file.rewind
       expect{ Parser.parse(file) }.to output("Lauren: 42 miles @ 34 mph\nDan: 39 miles @ 47 mph\nKumi: 0 miles\n").to_stdout
