@@ -140,6 +140,9 @@
   <p>
     I'll use the RSpec testing suite because that is what Root uses to test their Ruby.
   </p>
+  <p>
+    I put the entire program into a service class called Parser so that I could run integration tests with RSpec on the entire program through that sevice object.
+  </p>
 </section>
 
 <section>
