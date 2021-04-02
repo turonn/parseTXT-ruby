@@ -154,6 +154,9 @@
     </ul>
   </p>
   <p>
+    Of course, I'll need to unit test each individual method such as converting minutes to fractional hours, rounding of average speeds, handling zero hours/minutes, negative minutes, and other edge cases of each individual method.
+  </p>
+  <p>
     I'll use the RSpec testing suite because that is what Root uses to test their Ruby.
   </p>
   <p>
@@ -167,6 +170,6 @@
     When I first approached the problem, I went full ham and built <a src="https://github.com/turonn/parseTXT-rails" target="_blank">a full rails application</a>. I built in data validations to protect the user from entering in invalid formats, wrote Rails-enabled relations betweeen models, alerted the users to updates, made it possible to CRUD single records and drivers through an interface, tested the whole thing with RSpec, and gave the app a clean Root-inspired styling interface. After completing the app, I spent time reflecting and asking my mentor and other coding friends about my critical assumption that the user (evaluator) would be okay interacting with a Rails interface instead of the command line as was requested. In the end, I decieded to go back and rebuild a program that more closely aligns with the requested result from the problem.
   </p>
   <p>
-    As such, I had nearly all of the logic for this current version alreday written for this version! It was a matter of reapplying and retesting what I knew worked.
+    As such, I had nearly all of the logic for this current version alreday written for this version! It was a matter of reapplying and retesting what I knew worked. If you are interested, I would love to show that to you too when we talk!
   </p>
 </section>
