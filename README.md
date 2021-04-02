@@ -129,7 +129,9 @@
     <ul>
       <li>User wants to run program from command line - the <a src="https://github.com/turonn/parseTXT-rails" target="_blank">rails app</a> I orriginally made for this solution is <em>too</em> overkill.</li>
       <li>The user will import the correct file type and format.</li>
-      <li>The user will not make any typos, have any name variants, or time variations.</li>
+      <li>The user will not make any typos, have any name variants that reference the same driver or the same name to reference different drivers.</li>
+      <li>Drivers wont drive past midnight and they can't drive a negative distance.</li>
+      <li>Trips will not be logged without a corresponding Driver being added</li>
       <li>Everything will appear exactly as presented in the problem statement</li>
     </ul>
   </p>
@@ -138,7 +140,18 @@
 <section>
   <h2>3. What will I need to test to make sure it works?</h2>
   <p>
-    I'll need to test each method in each class isolated and then test the program as a whole. I'm not certain yet if I want make the module to calculate speed just yet, but I'll need to test that, too. Finally, I'll need to figure a way to test the program as a whole in RSpec.
+    I'll need to test each method in each class isolated and then test the program as a whole. The edge cases I will need to test are:
+    <ul>
+      <li>One Driver with no trips attached</li>
+      <li>One Driver with one invalid trip</li>
+      <li>One Driver with many invalid trips</li>
+      <li>One Driver with one valid trip</li>
+      <li>One Driver with many valid trips</li>
+      <li>One Driver with a mix of valid and invalid trips</li>
+      <li>Multiple Drivers with a mix of valid, invalid, and no trips</li>
+      <li>Triggering an invalid trip at 4.99/100.01 mph</li>
+      <li>Triggering a valid trip at 5/100</li>
+    </ul>
   </p>
   <p>
     I'll use the RSpec testing suite because that is what Root uses to test their Ruby.
