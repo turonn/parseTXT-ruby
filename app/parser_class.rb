@@ -1,6 +1,5 @@
 require_relative 'driver_class'
 require_relative 'trip_class'
-require 'byebug'
 
 class Parser
   def self.parse(arg)
