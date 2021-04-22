@@ -14,6 +14,12 @@ RSpec.describe "Driver" do
       Driver.new('testBob')
       expect(Driver.all.count).to eq(2)
     end
+    it "initalizes a hwy_miles variable" do
+      expect(subject.hwy_miles).to eq(0)
+    end
+    it "initalizes a hwy_percentage variable as 0" do
+      expect(subject.hwy_percentage).to eq(0)
+    end
   end
 
   describe "#add_time" do
@@ -121,6 +127,33 @@ RSpec.describe "Driver" do
       expect(Driver.all).not_to be_empty
       Driver.clear_data
       expect(Driver.all).to be_empty
+    end
+  end
+
+  describe '.add_to_highway_miles' do
+    it "adds givne miles to hwy_miles" do
+      subject.hwy_miles = 0
+      subject.add_to_highway_miles(10)
+      expect(subject.hwy_miles).to eq(10)
+    end
+  end
+
+  describe '.calculate_hwy_percentage' do
+    context "when total miles and highway miles are non-zero numbers" do
+      it "calculates the percentge of time on highway" do
+        subject.total_miles = 100
+        subject.hwy_miles = 50
+        subject.calculate_hwy_percentage
+        expect(subject.hwy_percentage).to eq(50)
+      end
+    end
+    context "when total miles == 0" do
+      it "returns 0" do
+        subject.hwy_miles = 100
+        subject.total_miles = 0
+        subject.calculate_hwy_percentage
+        expect(subject.hwy_percentage).to eq(0)
+      end
     end
   end
 end

@@ -1,5 +1,5 @@
 class Driver
-  attr_accessor :name, :total_time, :total_miles, :avg_speed
+  attr_accessor :name, :total_time, :total_miles, :avg_speed, :hwy_miles, :hwy_percentage
 
   def self.all
     @all ||= []
@@ -25,12 +25,18 @@ class Driver
     @total_time = '0:0'
     @total_miles = 0
     @avg_speed = 0
+    @hwy_miles = 0
+    @hwy_percentage = 0
     
     Driver.all << self
   end
 
   def add_miles(miles)
     @total_miles += miles.to_f
+  end
+
+  def add_to_highway_miles(miles)
+    @hwy_miles += miles.to_f
   end
 
   def add_time(time)
@@ -53,9 +59,13 @@ class Driver
       time_array = @total_time.split(':')
       time_array[1] = time_array[1].to_f / 60.0
       time_num = time_array[0].to_i + time_array[1]
-
       @avg_speed = (@total_miles / time_num).round()
     end
+  end
+
+  def calculate_hwy_percentage
+    return 0 if @total_miles == 0
+    @hwy_percentage = ((@hwy_miles.to_f / @total_miles.to_f)*100).round
   end
 
 end

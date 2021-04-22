@@ -1,5 +1,5 @@
 class Trip
-  attr_accessor :name, :start_time, :end_time, :trip_time, :miles_driven, :trip_speed
+  attr_accessor :name, :start_time, :end_time, :trip_time, :miles_driven, :trip_speed, :highway
 
   def self.all
     @all ||= []
@@ -17,8 +17,13 @@ class Trip
 
     calculate_time
     calculate_speed
+    is_highway
     
     Trip.all << self
+  end
+
+  def is_highway
+    @highway = @trip_speed >= 50
   end
 
   def calculate_time

@@ -21,6 +21,13 @@ RSpec.describe "Trip" do
     it 'calls calculate_speed and sets trip_speed' do
       expect(subject.trip_speed).to be
     end
+    it 'classifies if highway on initialization under 50' do
+      expect(subject.highway).to eq(false)
+    end
+    it 'classifies if highway over 50' do
+      trip = Trip.new('testT', '0:00', '1:00', 55)
+      expect(trip.highway).to eq(true)
+    end
   end
 
   describe '#calculate_time' do
@@ -57,6 +64,16 @@ RSpec.describe "Trip" do
       expect(Trip.all).not_to be_empty
       Trip.clear_data
       expect(Trip.all).to be_empty
+    end
+  end
+  describe '.is_highway' do
+    it 'sets @highway to false if @trip_speed is less than 50' do
+      subject.trip_speed = 15
+      expect(subject.is_highway).to eq(false)
+    end
+    it 'sets @highway to false if @trip_speed is less than 50' do
+      subject.trip_speed = 55
+      expect(subject.is_highway).to eq(true)
     end
   end
 end

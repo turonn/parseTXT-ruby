@@ -115,5 +115,18 @@ RSpec.describe "Parser" do
         expect{ Parser.parse(file) }.to output("Lauren: 42 miles @ 34 mph\nDan: 39 miles @ 47 mph\nKumi: 0 miles\n").to_stdout
       end
     end
+
+    context "when a trip is passed to a driver with a speed over 50mph and under 100mph" do
+      before do
+        File.open('testfile', 'w+') do |f|
+          f.write("Driver Dan\nTrip Dan 07:15 07:45 26")
+        end
+        file = File.open('testfile', 'r+')
+      end
+     it "adds those miles to the hwy_miles and have the correct hwy_percentage of that driver" do
+      expect{ Parser.parse(file) }.to output("Dan: 26 miles @ 52 mph 100% on hwy\n").to_stdout
+     end
+    end
+
   end
 end

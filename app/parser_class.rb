@@ -26,6 +26,9 @@ class Parser
       driver = Driver.lookup(trip.name)
       driver.add_miles(trip.miles_driven)
       driver.add_time(trip.trip_time)
+      if trip.highway == true
+        driver.add_to_highway_miles(trip.miles_driven)
+      end
     end
 
     #arrange all drivers in decending order based on miles driven
@@ -36,7 +39,8 @@ class Parser
     Driver.all.each do |driver|
       unless driver.total_miles == 0
         driver.calculate_avg_speed
-        puts "#{driver.name}: #{driver.total_miles.round()} miles @ #{driver.avg_speed} mph"
+        driver.calculate_hwy_percentage
+        puts "#{driver.name}: #{driver.total_miles.round()} miles @ #{driver.avg_speed} mph #{driver.hwy_percentage}% on hwy"
       else
         puts "#{driver.name}: 0 miles"
       end
